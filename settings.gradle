@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "AndroidBaseLib"
+rootProject.name = "android-base"
 include ':app'
 include ':libs:base-lib'
