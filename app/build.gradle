@@ -1,0 +1,25 @@
+//plugins {
+//    id 'com.android.application'
+//    id 'org.jetbrains.kotlin.android'
+//    id 'kotlin-kapt'
+//}
+
+apply {
+    from "${project.rootDir.path}/buildApp.gradle"
+}
+
+android {
+
+    defaultConfig {
+
+    }
+
+    buildTypes {
+
+    }
+
+}
+
+dependencies {
+//    implementation project(Config.modules.base)
+}
