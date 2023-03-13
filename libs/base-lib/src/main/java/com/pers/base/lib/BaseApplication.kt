@@ -6,6 +6,7 @@ open class BaseApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        AppConfig.init(this)
     }
 
 }

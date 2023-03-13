@@ -62,14 +62,12 @@ class Config {
 
                     'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4',
                     'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4',
-                    'androidx.datastore:datastore-preferences:1.0.0',
-                    'androidx.datastore:datastore-preferences-core:1.0.0',
 
                     'androidx.collection:collection:1.2.0',
                     'androidx.collection:collection-ktx:1.2.0',
 
-                    //读取和写入图片文件 EXIF 标记。
-                    'androidx.exifinterface:exifinterface:1.3.6',
+//                    //读取和写入图片文件 EXIF 标记。
+//                    'androidx.exifinterface:exifinterface:1.3.6',
 
             ],
             baseTest       : [
