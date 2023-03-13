@@ -4,7 +4,7 @@ class Config {
     public static applicationId = 'com.example.android.base'
 
     public static compileSdk = 30
-    public static minSdk = 21
+    public static minSdk = 24
     public static targetSdk = 30
     public static versionCode = 1
     public static versionName = "1.0"
@@ -48,7 +48,7 @@ class Config {
 //                    'androidx.appcompat:appcompat:1.4.2',
 //                    'com.google.android.material:material:1.6.1',
 
-                    //targetVersion = 30
+                    //targetVersion <= 30
                     'androidx.core:core-ktx:1.6.0',
                     'androidx.appcompat:appcompat:1.3.1',
                     'com.google.android.material:material:1.4.0',
@@ -63,6 +63,7 @@ class Config {
                     'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4',
                     'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4',
                     'androidx.datastore:datastore-preferences:1.0.0',
+                    'androidx.datastore:datastore-preferences-core:1.0.0',
 
                     'androidx.collection:collection:1.2.0',
                     'androidx.collection:collection-ktx:1.2.0',

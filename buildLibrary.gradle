@@ -5,8 +5,10 @@ apply {
 }
 
 android {
-    namespace Config.applicationId
+    namespace Config.applicationId + suffix
     compileSdk Config.compileSdk
+
+    println("namespace:" + namespace)
 
     defaultConfig {
         minSdk Config.minSdk
@@ -37,14 +39,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-        encoding "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '1.8'
     }
-
     buildFeatures {
         viewBinding true
     }
@@ -54,7 +54,20 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
-//    implementation Config.packages.base
-//    testImplementation Config.packages.baseTest
-//    androidTestImplementation Config.packages.baseAndroidTest
+    implementation Config.packages.base
+    testImplementation Config.packages.baseTest
+    androidTestImplementation Config.packages.baseAndroidTest
+
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+    implementation 'com.squareup.okio:okio:3.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+
+}
+
+def getSuffix() {
+    //project.name: base-lib
+    return "." + project.name.replace("-", ".")
 }

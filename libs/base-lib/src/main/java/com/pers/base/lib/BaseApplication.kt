@@ -1,9 +1,8 @@
-package com.example.android.base
+package com.pers.base.lib
 
 import androidx.multidex.MultiDexApplication
-import com.pers.base.lib.BaseApplication
 
-class App : BaseApplication() {
+open class BaseApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
