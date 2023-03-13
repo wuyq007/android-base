@@ -3,9 +3,9 @@ class Config {
     public static appName = 'AndroidBase'
     public static applicationId = 'com.example.android.base'
 
-    public static compileSdk = 33
+    public static compileSdk = 30
     public static minSdk = 21
-    public static targetSdk = 33
+    public static targetSdk = 30
     public static versionCode = 1
     public static versionName = "1.0"
 
@@ -33,25 +33,25 @@ class Config {
     public static packages = [
             base           : [
 
-                    //targetVersion = 33
-                    'androidx.core:core-ktx:1.9.0',
-                    'androidx.appcompat:appcompat:1.6.1',
-                    'com.google.android.material:material:1.8.0',
+//                    //targetVersion = 33
+//                    'androidx.core:core-ktx:1.9.0',
+//                    'androidx.appcompat:appcompat:1.6.1',
+//                    'com.google.android.material:material:1.8.0',
 
-                    //targetVersion = 32
-                    'androidx.core:core-ktx:1.8.0',
-                    'androidx.appcompat:appcompat:1.5.1',
-                    'com.google.android.material:material:1.8.0',
+//                    //targetVersion = 32
+//                    'androidx.core:core-ktx:1.8.0',
+//                    'androidx.appcompat:appcompat:1.5.1',
+//                    'com.google.android.material:material:1.8.0',
 
 //                    //targetVersion = 31
 //                    'androidx.core:core-ktx:1.8.0',
 //                    'androidx.appcompat:appcompat:1.4.2',
 //                    'com.google.android.material:material:1.6.1',
 
-//                    //targetVersion = 30
-//                    'androidx.core:core-ktx:1.6.0',
-//                    'androidx.appcompat:appcompat:1.3.1',
-//                    'com.google.android.material:material:1.4.0',
+                    //targetVersion = 30
+                    'androidx.core:core-ktx:1.6.0',
+                    'androidx.appcompat:appcompat:1.3.1',
+                    'com.google.android.material:material:1.4.0',
 
                     'androidx.multidex:multidex:2.0.1',
                     'androidx.recyclerview:recyclerview:1.2.1',
