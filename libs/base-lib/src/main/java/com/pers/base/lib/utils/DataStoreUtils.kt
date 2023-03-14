@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.pers.base.lib.AppConfig
 import kotlinx.coroutines.flow.*
+import java.io.IOException
 import kotlin.properties.Delegates
 
 // 文件名称: /data/data/项目包名/files/下创建名为 dataStore_data 的文件
@@ -24,7 +25,14 @@ object DataStoreUtils {
 
     suspend fun getInt(key: String): Int? {
         return try {
-            dataStore.data.map {
+            dataStore.data.catch {
+                if (it is IOException) {
+                    it.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw it
+                }
+            }.map {
                 it[intPreferencesKey(key)]
             }.firstOrNull()
         } catch (e: Exception) {
@@ -41,7 +49,14 @@ object DataStoreUtils {
 
     suspend fun getFloat(key: String): Float? {
         return try {
-            dataStore.data.map {
+            dataStore.data.catch {
+                if (it is IOException) {
+                    it.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw it
+                }
+            }.map {
                 it[floatPreferencesKey(key)]
             }.firstOrNull()
         } catch (e: Exception) {
@@ -58,7 +73,14 @@ object DataStoreUtils {
 
     suspend fun getDouble(key: String): Double? {
         return try {
-            dataStore.data.map {
+            dataStore.data.catch {
+                if (it is IOException) {
+                    it.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw it
+                }
+            }.map {
                 it[doublePreferencesKey(key)]
             }.firstOrNull()
         } catch (e: Exception) {
@@ -75,7 +97,14 @@ object DataStoreUtils {
 
     suspend fun getLong(key: String): Long? {
         return try {
-            dataStore.data.map {
+            dataStore.data.catch {
+                if (it is IOException) {
+                    it.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw it
+                }
+            }.map {
                 it[longPreferencesKey(key)]
             }.firstOrNull()
         } catch (e: Exception) {
@@ -92,7 +121,14 @@ object DataStoreUtils {
 
     suspend fun getBoolean(key: String): Boolean? {
         return try {
-            dataStore.data.map {
+            dataStore.data.catch {
+                if (it is IOException) {
+                    it.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw it
+                }
+            }.map {
                 it[booleanPreferencesKey(key)]
             }.firstOrNull()
         } catch (e: Exception) {
@@ -109,7 +145,14 @@ object DataStoreUtils {
 
     suspend fun getString(key: String): String? {
         return try {
-            dataStore.data.map {
+            dataStore.data.catch {
+                if (it is IOException) {
+                    it.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw it
+                }
+            }.map {
                 it[stringPreferencesKey(key)]
             }.firstOrNull()
         } catch (e: Exception) {
@@ -126,7 +169,14 @@ object DataStoreUtils {
 
     suspend fun getStringSet(key: String): Set<String>? {
         return try {
-            dataStore.data.map {
+            dataStore.data.catch {
+                if (it is IOException) {
+                    it.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw it
+                }
+            }.map {
                 it[stringSetPreferencesKey(key)]
             }.firstOrNull()
         } catch (e: Exception) {
@@ -241,7 +291,14 @@ object DataStoreUtils {
 
     suspend fun <T> get(key: Preferences.Key<T>): T? {
         return try {
-            dataStore.data.map { it ->
+            dataStore.data.catch {
+                if (it is IOException) {
+                    it.printStackTrace()
+                    emit(emptyPreferences())
+                } else {
+                    throw it
+                }
+            }.map { it ->
                 it[key]
             }.firstOrNull()
         } catch (e: Exception) {
