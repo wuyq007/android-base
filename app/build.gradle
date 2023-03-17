@@ -16,6 +16,8 @@ android {
 
 dependencies {
 
-    implementation project(Config.modules.base)
+    Config.modules.libs.each {
+        implementation project(it)
+    }
 
 }

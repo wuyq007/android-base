@@ -9,11 +9,12 @@ class Config {
     public static versionCode = 1
     public static versionName = "1.0"
 
+
     /**
      * 各个模块名称
      */
     public static modules = [
-            base: ':libs:base-lib',
+            libs  : [':libs:base-lib', ':libs:http-lib'],
             module: [],
             common: [],
     ]
@@ -32,23 +33,22 @@ class Config {
      */
     public static packages = [
             base           : [
-
 //                    //targetVersion = 33
 //                    'androidx.core:core-ktx:1.9.0',
 //                    'androidx.appcompat:appcompat:1.6.1',
 //                    'com.google.android.material:material:1.8.0',
-
+//
 //                    //targetVersion = 32
 //                    'androidx.core:core-ktx:1.8.0',
 //                    'androidx.appcompat:appcompat:1.5.1',
 //                    'com.google.android.material:material:1.8.0',
-
+//
 //                    //targetVersion = 31
 //                    'androidx.core:core-ktx:1.8.0',
 //                    'androidx.appcompat:appcompat:1.4.2',
 //                    'com.google.android.material:material:1.6.1',
 
-                    //targetVersion <= 30
+                    //targetVersion = 30
                     'androidx.core:core-ktx:1.6.0',
                     'androidx.appcompat:appcompat:1.3.1',
                     'com.google.android.material:material:1.4.0',
@@ -65,10 +65,6 @@ class Config {
 
                     'androidx.collection:collection:1.2.0',
                     'androidx.collection:collection-ktx:1.2.0',
-
-//                    //读取和写入图片文件 EXIF 标记。
-//                    'androidx.exifinterface:exifinterface:1.3.6',
-
             ],
             baseTest       : [
                     'junit:junit:4.13.2',
@@ -81,22 +77,32 @@ class Config {
 
 
     public static jetpack = [
+            datastore : [
+                    'androidx.datastore:datastore-preferences:1.0.0',
+                    'androidx.datastore:datastore-preferences-core:1.0.0'
+            ],
             navigation: [
                     "androidx.navigation:navigation-fragment:${versions.nav_version}",
                     "androidx.navigation:navigation-fragment-ktx:${versions.nav_version}",
                     "androidx.navigation:navigation-ui:${versions.nav_version}",
-                    "androidx.navigation:navigation-ui-ktx:${versions.nav_version}",
-            ],
+                    "androidx.navigation:navigation-ui-ktx:${versions.nav_version}",],
+
             paging    : "androidx.paging:paging-runtime:${versions.paging_version}",
             pagingTest: "androidx.paging:paging-common:${versions.paging_version}",
 
-            room      : [
-                    "androidx.room:room-runtime:${versions.room_version}",
-                    "androidx.room:room-ktx:${versions.room_version}",
-            ],
+            room      : ["androidx.room:room-runtime:${versions.room_version}",
+                         "androidx.room:room-ktx:${versions.room_version}",],
             roomKapt  : "androidx.room:room-compiler:${versions.room_version}",
             roomTest  : "androidx.room:room-testing:${versions.room_version}",
-
     ]
+
+    public static network = ['com.squareup.okhttp3:okhttp:4.10.0',
+                             'com.squareup.okhttp3:logging-interceptor:4.10.0',
+                             'com.squareup.okio:okio:3.0.0',
+                             'com.squareup.retrofit2:retrofit:2.9.0',
+                             'com.squareup.retrofit2:converter-gson:2.9.0',
+                             'com.squareup.retrofit2:converter-scalars:2.9.0']
+
+
 
 }

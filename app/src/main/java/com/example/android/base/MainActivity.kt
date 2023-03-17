@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.android.base.databinding.ActivityMainBinding
 import com.pers.base.lib.BaseActivity
 import com.pers.base.lib.utils.DataStoreUtils
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
@@ -21,6 +22,7 @@ class MainActivity : BaseActivity() {
         launch {
             val testFloat = DataStoreUtils.getFloat("testFlow")
             Log.e("flow", "testFloat: $testFloat")
+
         }
 
 
