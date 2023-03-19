@@ -13,17 +13,174 @@ object FlowTest {
     fun main(args: Array<String>) {
         runBlocking(Dispatchers.Default) {
 //            createFlow()
+            receiveFlow()
 
 //            val time = measureTimeMillis {
 //                getJoined()
 //            }
 //            println("getJoined 总耗时：$time")
-
-            getHttp()
+//            getHttp()
         }
     }
 
+    private suspend fun receiveFlow() {
+//        //接收数据会阻塞，直到接收到数据为止
+//        val startTime = System.currentTimeMillis()
+//        flow {
+//            for (i in 1..5) {
+//                delay(1000)
+//                val emitTime = System.currentTimeMillis()
+//                println("emit = $i; time:${emitTime - startTime}")
+//                emit(i)
+//            }
+//        }.collect {
+//            delay(1000)
+//            val endTime = System.currentTimeMillis()
+//            println("collect = $it; time:${endTime - startTime}")
+//        }
+//
+//        flowOf(1, 2, 3, 4, 5).collectIndexed { index, value ->
+//            delay(1000)
+//            println("index = $index; value = $value")
+//        }
+
+        //可以实现，在发来的数据你来不及接收的时候，立刻停止你正在忙的工作，马上去从接收数据开始重新走一遍逻辑（相当于重启接收了）
+        //
+        //数据来不及处理的时候只会保存最新的数据
+        //不阻塞，优先接收数据，再处理
+//        val startTime = System.currentTimeMillis()
+//        flowOf(1, 2, 3, 4, 5).collectLatest {
+//            val endTime = System.currentTimeMillis()
+//            println("value = $it; time:${endTime - startTime}")
+//        }
+
+//        val startTime = System.currentTimeMillis()
+//        flow {
+//            for (i in 1..5) {
+//                delay(1000)
+//                val emitTime = System.currentTimeMillis()
+//                println("emit = $i; time:${emitTime - startTime}")
+//                emit(i)
+//            }
+//        }.collectLatest {
+//            val endTime = System.currentTimeMillis()
+//            println("value = $it; time:${endTime - startTime}")
+//            delay(1000)
+//            val endTime2 = System.currentTimeMillis()
+//            println("delay value = $it; time:${endTime2 - startTime}")
+//        }
+
+//        val startTime = System.currentTimeMillis()
+//        flow {
+//            for (i in 1..5) {
+//                delay(200)
+//                emit(i)
+//            }
+//        }.collect {
+//            val endTime = System.currentTimeMillis()
+//            println("it = $it; time:${endTime - startTime}")
+//            delay(1000)
+//
+//            val endTime2 = System.currentTimeMillis()
+//            println("value = $it; time:${endTime2 - startTime}")
+//        }
+
+
+//        val single: String = flow {
+//            emit("A")
+////            emit("B")
+//        }.single()
+//        println("single = $single")
+
+//
+//        val singleOrNull: String? = flow {
+//            emit(null)
+//        }.singleOrNull()
+//        println("singleOrNull = firstOrNull")
+
+
+//        val singleOrNull: String = flow {
+//            emit("A")
+//            emit("B")
+//        }.first()
+//        println("singleOrNull = $singleOrNull")
+
+//        val test: Any? = null
+//        val first = flow {
+//            emit(test)
+//            emit("B")
+//        }.first()
+//        println("first = $first")
+//
+//        val firstOrNull: String? = flow {
+//            emit(null)
+//            emit("B")
+//        }.firstOrNull()
+//        println("firstOrNull = $firstOrNull")
+
+
+//        val reduce = flow {
+//            emit("A")
+//            emit("B")
+//            emit("C")
+//            emit("D")
+//        }.reduce { accumulator, value ->
+//            println("accumulator = $accumulator; value = $value")
+//            accumulator + value
+//        }
+//        println("reduce = $reduce")
+
+
+//        val reduce = flowOf(1, 2, 3, 4, 5).reduce { accumulator, value ->
+//            println("accumulator = $accumulator; value = $value")
+//            accumulator + value
+//        }
+//        println("reduce = $reduce")
+
+//        val fold = flowOf(1, 2, 3, 4, 5).fold(100) { accumulator, value ->
+//            println("accumulator = $accumulator; value = $value")
+//            accumulator + value
+//        }
+//        println("reduce = $fold")
+
+
+//        val fold = flowOf(null,1,2,3,4,5).fold(100) { accumulator, value ->
+//            println("accumulator = $accumulator; value = $value")
+//            if (value == null) {
+//                accumulator
+//            } else {
+//                accumulator + value
+//            }
+//        }
+//        println("reduce = $fold")
+
+
+//        val destination: MutableList<Int> = arrayOf(-1, -2, -3, -4, -5).toList() as MutableList<Int>
+//        val toList: MutableList<Int> = flowOf(1, 2, 3, 4, 5).toList(destination) as MutableList<Int>
+//        println("toList = $toList")
+
+//        val destination: MutableSet<Int> = arrayOf(-1, -2, -3, -4, -5).toSet() as MutableSet<Int>
+//        val toSet: Set<Int> = flowOf(1, 2, 3, 4, 5).toSet(destination)
+//        println("toSet = $toSet")
+
+    }
+
     private suspend fun createFlow() {
+
+//        //发送数据会阻塞，直到发送的数据被接收为止
+//        val startTime = System.currentTimeMillis()
+//        flow {
+//            for (i in 1..5) {
+//                delay(1000)
+//                val emitTime = System.currentTimeMillis()
+//                println("emit = $i; time:${emitTime - startTime}")
+//                emit(i)
+//            }
+//        }.collect {
+//            val endTime = System.currentTimeMillis()
+//            println("collect = $it; time:${endTime - startTime}")
+//        }
+
 //        flow {
 //            for (i in 1..5) {
 //                emit(i)
