@@ -14,8 +14,9 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "da
 
 object DataStoreUtils {
 
-    private val context: () -> Context = { AppConfig.getContext() }
-    private val dataStore = context().dataStore
+    private val dataStore: DataStore<Preferences> by lazy {
+        AppConfig.application.dataStore
+    }
 
     suspend fun saveInt(key: String, value: Int) {
         dataStore.edit {

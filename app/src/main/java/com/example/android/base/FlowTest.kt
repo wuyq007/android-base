@@ -5,9 +5,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import java.net.URL
-import java.net.URLDecoder
-import java.net.URLEncoder
-import java.nio.charset.Charset
 import kotlin.random.Random
 
 object FlowTest {
@@ -16,7 +13,12 @@ object FlowTest {
     fun main(args: Array<String>) {
         runBlocking(Dispatchers.Default) {
 //            createFlow()
-//            getJoined()
+
+//            val time = measureTimeMillis {
+//                getJoined()
+//            }
+//            println("getJoined 总耗时：$time")
+
             getHttp()
         }
     }
@@ -80,10 +82,9 @@ object FlowTest {
 
 
     private suspend fun getHttp() {
-        println("Flow init：" + Thread.currentThread().name)
         //1.创建Flow，可指定发射数据类型
         callbackFlow<InfoBean?> {
-            println("Flow start：" + Thread.currentThread().name)
+            println("Flow On：" + Thread.currentThread().name)
             //2.网络请求
             var url: URL = URL("https://static.paiyaapp.com/music/songs.json")
             var text = ""
@@ -99,9 +100,10 @@ object FlowTest {
             awaitClose { //协程被取消或者flow被关闭，都会执行这个代码块，可以在这个代码块里面进行一些资源释放等
                 println("awaitClose：" + Thread.currentThread().name)
             }
-        }
-            //6.flowOn：指定上游的线程，flowOn允许出现多次，每次执行切换，都会改变前面的线程
-            .flowOn(Dispatchers.IO).catch {
+        }.flowOn(Dispatchers.IO)//6.flowOn：指定上游的线程，flowOn允许出现多次，每次执行切换，都会改变前面的线程
+            .onStart {
+                println("onStart：" + Thread.currentThread().name)
+            }.catch {
                 //7.处理异常 catch 到 Flow上游的异常，这里会切换到调用Flow前的线程
                 println("catch：${it.message}  " + Thread.currentThread().name)
             }.onCompletion {
@@ -110,7 +112,6 @@ object FlowTest {
             }.collect {
                 //9.获取到数据，这里会切换到调用Flow前的线程
                 println("collect：" + Thread.currentThread().name)
-                println("collect：${it?.songs}")
             }
     }
 
@@ -131,8 +132,6 @@ object FlowTest {
 
 
     private suspend fun getJoined() = withContext(Dispatchers.IO) {
-        val startTime = System.currentTimeMillis()
-        println("getJoined start：$startTime")
         val jobList: MutableList<Deferred<String>> = ArrayList()
         val stringList: MutableList<String> = ArrayList()
         for (i in 1..10) {
@@ -141,8 +140,6 @@ object FlowTest {
         jobList.forEach {
             stringList.add(it.await())
         }
-        val endTime = System.currentTimeMillis()
-        println("getJoined end：$endTime；总耗时：${endTime - startTime}")
         println("stringList = $stringList")
     }
 
