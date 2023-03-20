@@ -1,4 +1,4 @@
-package com.pers.base.lib.utils
+package com.pers.libs.base.utils
 
 import java.security.MessageDigest
 

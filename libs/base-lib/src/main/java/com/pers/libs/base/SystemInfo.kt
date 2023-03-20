@@ -1,8 +1,9 @@
-package com.pers.base.lib
+package com.pers.libs.base
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.provider.Settings
+import com.pers.libs.base.app.AppConfig
 import java.util.*
 
 

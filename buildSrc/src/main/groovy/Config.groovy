@@ -96,12 +96,18 @@ class Config {
             roomTest  : "androidx.room:room-testing:${versions.room_version}",
     ]
 
-    public static network = ['com.squareup.okhttp3:okhttp:4.10.0',
-                             'com.squareup.okhttp3:logging-interceptor:4.10.0',
-                             'com.squareup.okio:okio:3.0.0',
-                             'com.squareup.retrofit2:retrofit:2.9.0',
-                             'com.squareup.retrofit2:converter-gson:2.9.0',
-                             'com.squareup.retrofit2:converter-scalars:2.9.0']
+    public static square = [
+            okhttp : [
+                    'com.squareup.okhttp3:okhttp:4.10.0',
+                    'com.squareup.okhttp3:logging-interceptor:4.10.0',
+            ],
+            retrofit      : [
+                    'com.squareup.retrofit2:retrofit:2.9.0',
+                    'com.squareup.retrofit2:converter-gson:2.9.0',
+                    'com.squareup.retrofit2:converter-scalars:2.9.0'
+            ],
+            okio    : 'com.squareup.okio:okio:3.0.0',
+    ]
 
 
 

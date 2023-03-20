@@ -1,22 +1,11 @@
-package com.pers.base.lib.utils
+package com.pers.libs.base.utils
 
-import android.annotation.SuppressLint
-import android.content.ContentResolver
-import android.content.ContentUris
 import android.content.Context
-import android.database.Cursor
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.DocumentsContract
-import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.text.TextUtils
-import androidx.annotation.RequiresApi
 import androidx.documentfile.provider.DocumentFile
-import com.pers.base.lib.AppConfig
+import com.pers.libs.base.app.AppConfig
 import java.io.*
-import java.util.*
 
 
 object FileUtils {

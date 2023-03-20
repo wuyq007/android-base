@@ -6,6 +6,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import java.net.URL
 import kotlin.random.Random
+import kotlin.system.measureTimeMillis
 
 object FlowTest {
 
@@ -15,14 +16,35 @@ object FlowTest {
 //            createFlow()
             receiveFlow()
 
-//            val time = measureTimeMillis {
-//                getJoined()
+
+            flowOf(1, 2, 3, 4, 5).debounce(500).first()
+//            flowOf(1, 2, 3, 4, 5).map {
+//                it.toString() + "A"
+//            }.collectIndexed { index, value ->
+//                println("index = $index; value = $value")
 //            }
-//            println("getJoined 总耗时：$time")
+
+            val time = measureTimeMillis {
+                getJoined()
+            }
+            println("getJoined 总耗时：$time")
 //            getHttp()
         }
+
+        try {
+
+        } catch (_: Exception) {
+
+        } finally {
+            println("回收资源")
+        }
+
     }
 
+
+    /**
+     * 接收操作符
+     */
     private suspend fun receiveFlow() {
 //        //接收数据会阻塞，直到接收到数据为止
 //        val startTime = System.currentTimeMillis()
@@ -99,10 +121,10 @@ object FlowTest {
 //        println("singleOrNull = firstOrNull")
 
 
-//        val singleOrNull: String = flow {
-//            emit("A")
-//            emit("B")
-//        }.first()
+        val singleOrNull: String = flow {
+            emit("A")
+            emit("B")
+        }.first()
 //        println("singleOrNull = $singleOrNull")
 
 //        val test: Any? = null
@@ -131,17 +153,17 @@ object FlowTest {
 //        println("reduce = $reduce")
 
 
-//        val reduce = flowOf(1, 2, 3, 4, 5).reduce { accumulator, value ->
-//            println("accumulator = $accumulator; value = $value")
-//            accumulator + value
-//        }
+        val reduce = flowOf(1, 2, 3, 4, 5).reduce { accumulator, value ->
+            println("accumulator = $accumulator; value = $value")
+            accumulator + value
+        }
 //        println("reduce = $reduce")
-
-//        val fold = flowOf(1, 2, 3, 4, 5).fold(100) { accumulator, value ->
+//
+//        val fold = flowOf(1, 2, 3, 4, 5).fold("A") { accumulator, value ->
 //            println("accumulator = $accumulator; value = $value")
 //            accumulator + value
 //        }
-//        println("reduce = $fold")
+//        println("fold = $fold")
 
 
 //        val fold = flowOf(null,1,2,3,4,5).fold(100) { accumulator, value ->
@@ -163,8 +185,35 @@ object FlowTest {
 //        val toSet: Set<Int> = flowOf(1, 2, 3, 4, 5).toSet(destination)
 //        println("toSet = $toSet")
 
+
+//        val array = arrayListOf(0)
+//        flowOf(1, 2, 3, 4, 5).toCollection(array)
+//        println("toCollection：$array")
+
+//        //直接触发流的执行，不设置action,入参为coroutineScope 一般不会直接调用，会搭配别的操作符一起使用，如onEach,onCompletion 。返回值是Job
+//        val coroutineScope = CoroutineScope( Dispatchers.IO)
+//        flowOf(1, 2, 3, 4, 5).launchIn(coroutineScope)
+//        coroutineScope.launch {
+//
+//        }
+
+//        val last = flowOf("A", "B", "C", "D").last()
+//        println("first = $last")
+//        val lastOrNull = flowOf("A", "B", "C", null).lastOrNull()
+//        println("lastOrNull = $lastOrNull")
+
+//        val count = flow {
+//            for (i in 1..10) {
+//                emit(i)
+//            }
+//        }.count()
+//        println("count = $count")
     }
 
+
+    /**
+     * 创建操作符
+     */
     private suspend fun createFlow() {
 
 //        //发送数据会阻塞，直到发送的数据被接收为止
@@ -235,6 +284,14 @@ object FlowTest {
 //        }.collect {
 //            println("it = $it")
 //        }
+
+
+//            emptyFlow<Int>().collectIndexed { index, value ->
+//                println("emptyFlow = $index; value = $value")
+//            }
+//
+//            val emptyFlow = emptyFlow<Int>().firstOrNull()
+//            println("emptyFlow：$emptyFlow")
     }
 
 

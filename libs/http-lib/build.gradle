@@ -15,6 +15,8 @@ android {
 
 dependencies {
 
-    implementation Config.network
+    implementation Config.square.retrofit
+    implementation Config.square.okhttp
+    implementation Config.square.okio
 
 }

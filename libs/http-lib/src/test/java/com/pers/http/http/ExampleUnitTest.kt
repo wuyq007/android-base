@@ -1,4 +1,4 @@
-package com.pers.http.lib
+package com.pers.http.http
 
 import org.junit.Test
 

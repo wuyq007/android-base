@@ -1,4 +1,4 @@
-package com.pers.base.lib
+package com.pers.libs.base.app
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -8,8 +8,9 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Build
 import android.util.DisplayMetrics
-import com.pers.base.lib.utils.DataStoreUtils
-import com.pers.base.lib.utils.EncodedUtils
+import com.pers.libs.base.SystemInfo
+import com.pers.libs.base.utils.DataStoreUtils
+import com.pers.libs.base.utils.EncodedUtils
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -18,7 +19,7 @@ object AppConfig {
     private lateinit var app: Application
 
     fun init(app: Application) {
-        this.app = app
+        AppConfig.app = app
     }
 
     /**
@@ -115,6 +116,7 @@ object AppConfig {
             runBlocking {
                 var uniqueID: String? = DataStoreUtils.getString("ANDROID_DEVICE_UNIQUE_ID")
                 if (uniqueID == null || uniqueID == "") {
+                    //添加一个标识
                     val identification = "+10086"
                     val systemStr =
                         identification + SystemInfo.androidID + SystemInfo.systemModel + SystemInfo.board + SystemInfo.hardware + SystemInfo.deviceBrand + SystemInfo.deviceManufacturer + SystemInfo.fingerprint + SystemInfo.buildId + SystemInfo.serial

@@ -1,8 +1,8 @@
-package com.pers.base.lib.utils
+package com.pers.libs.base.utils
 
 import android.content.Context
 import android.os.Environment
-import com.pers.base.lib.AppConfig
+import com.pers.libs.base.app.AppConfig
 import java.io.File
 
 object SDCardUtils {

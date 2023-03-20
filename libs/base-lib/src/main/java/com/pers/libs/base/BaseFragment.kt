@@ -1,4 +1,4 @@
-package com.pers.base.lib
+package com.pers.libs.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
