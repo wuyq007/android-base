@@ -9,6 +9,5 @@ open class BaseApplication : MultiDexApplication() {
         super.onCreate()
         AppConfig.init(this)
 
-
     }
 }
