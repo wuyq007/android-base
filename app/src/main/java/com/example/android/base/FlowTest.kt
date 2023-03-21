@@ -14,30 +14,57 @@ object FlowTest {
     fun main(args: Array<String>) {
         runBlocking(Dispatchers.Default) {
 //            createFlow()
-            receiveFlow()
+//            receiveFlow()
+            launch(Dispatchers.IO){
+
+            }
+
+//            println(1)
+//            val jobAtomic = launch(Dispatchers.Default, CoroutineStart.ATOMIC) {
+//                println(2)
+//                delay(1)
+//                println(22)
+//            }
+//            jobAtomic.cancel()
+//            println(3)
+
+//            println(1)
+//            val job = launch(Dispatchers.Default, CoroutineStart.DEFAULT) {
+//                println(2)
+//                println(22)
+//            }
+//            job.cancel()
+//            println(3)
+
+//            println(1)
+//            val job = launch(start = CoroutineStart.DEFAULT) {
+//                delay(50)
+//                println(2)
+//            }
+//            job.cancel()
+//            println(3)
 
 
-            flowOf(1, 2, 3, 4, 5).debounce(500).first()
 //            flowOf(1, 2, 3, 4, 5).map {
 //                it.toString() + "A"
 //            }.collectIndexed { index, value ->
 //                println("index = $index; value = $value")
 //            }
 
-            val time = measureTimeMillis {
-                getJoined()
-            }
-            println("getJoined 总耗时：$time")
+//            val time = measureTimeMillis {
+//                getJoined()
+//            }
+//            println("getJoined 总耗时：$time")
 //            getHttp()
         }
 
-        try {
-
-        } catch (_: Exception) {
-
-        } finally {
-            println("回收资源")
-        }
+//        try {
+//
+//        } catch (_: Exception) {
+//
+//        } finally {
+//            println("回收资源")
+//        }
 
     }
 

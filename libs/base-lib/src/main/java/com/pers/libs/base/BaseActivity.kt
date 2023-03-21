@@ -4,29 +4,29 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.pers.libs.base.app.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 open class BaseActivity : AppCompatActivity(), CoroutineScope {
 
-    private lateinit var job: Job
+    private lateinit var mainJob: Job
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+        get() = mainJob + Dispatchers.Main
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        job = Job()
+        // 创建 Job （用于管理CoroutineScope中的所有携程）
+        mainJob = Job()
     }
 
     override fun onDestroy() {
-        job.cancel()
+        super.onDestroy()
+        // 当 Activity 销毁的时候取消该 Scope 管理的 job。 这样该 Scope 内创建的子 Coroutine 都会被自动的取消。
+        mainJob.cancel()
         appLifecycleObserver?.let {
             removeAppLifecycleObserver(it)
         }
-        super.onDestroy()
     }
 
     private var appLifecycleObserver: AppLifecycleObserver? = null
