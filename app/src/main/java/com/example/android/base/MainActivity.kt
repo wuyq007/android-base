@@ -1,5 +1,7 @@
 package com.example.android.base
 
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import com.example.android.base.databinding.ActivityMainBinding
 import com.pers.libs.base.BaseActivity
@@ -10,6 +12,19 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
 
+    private fun getApplicationChannel(): String? {
+        try {
+            val packageManager: PackageManager = packageManager
+            val applicationInfo = packageManager
+                .getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+            return applicationInfo.metaData.getString("UMENG_CHANNEL")
+        } catch (_: PackageManager.NameNotFoundException) {
+        }
+        return ""
+    }
+
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -18,6 +33,8 @@ class MainActivity : BaseActivity() {
         launch {
 
         }
+
+        binding.textView.text = "渠道号："+getApplicationChannel()
 
 
 //        val filePath = "/storage/emulated/.../7ac389230d004e2dac6a7c6bb484c017.jpg"
