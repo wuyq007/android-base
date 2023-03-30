@@ -11,18 +11,18 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
-    private fun getApplicationChannel(): String? {
+    private fun getApplicationChannel(): String {
         try {
             val packageManager: PackageManager = packageManager
-            val applicationInfo = packageManager
-                .getApplicationInfo(packageName, PackageManager.GET_META_DATA)
-            return applicationInfo.metaData.getString("UMENG_CHANNEL")
-        } catch (_: PackageManager.NameNotFoundException) {
+            val applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+            applicationInfo.metaData?.getString("UMENG_CHANNEL")?.let {
+                return it
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
         }
         return ""
     }
-
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +30,14 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enabledAppLifecycleObserver()
+
         launch {
 
         }
 
-        binding.textView.text = "渠道号："+getApplicationChannel()
+        setFitsSystemWindows()
 
+        binding.textView.text = "渠道号：" + getApplicationChannel()
 
 //        val filePath = "/storage/emulated/.../7ac389230d004e2dac6a7c6bb484c017.jpg"
 //        val suffix = FileUtils.getSuffixName(filePath)
@@ -57,7 +59,6 @@ class MainActivity : BaseActivity() {
 //        Log.e("BBB", "screenWidth:$screenWidth")
 //        val screenHeight = AppConfig.screenHeight
 //        Log.e("BBB", "screenHeight:$screenHeight")
-
 
 
 //        launch {

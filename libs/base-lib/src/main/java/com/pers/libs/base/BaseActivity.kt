@@ -2,6 +2,8 @@ package com.pers.libs.base
 
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.pers.libs.base.app.*
 import kotlinx.coroutines.*
@@ -13,11 +15,24 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = mainJob + Dispatchers.Main
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 创建 Job （用于管理CoroutineScope中的所有携程）
         mainJob = Job()
+    }
+
+    /**
+     * 隐藏标题栏，如果标题栏默认显示的话
+     */
+    open fun hideTitleBar() {
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+    }
+
+    /**
+     * 沉浸式预留状态栏高度
+     */
+    open fun setFitsSystemWindows() {
+        findViewById<ViewGroup>(android.R.id.content).getChildAt(0).fitsSystemWindows = true
     }
 
     override fun onDestroy() {
