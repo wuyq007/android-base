@@ -21,7 +21,21 @@ class MainActivity : BaseActivity() {
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
-        return ""
+        return "-1"
+    }
+
+    fun isWxInstall(): Boolean {
+        val packageManager: PackageManager = application.packageManager
+        val pinfo = packageManager.getInstalledPackages(0)
+        if (pinfo != null) {
+            for (i in pinfo.indices) {
+                val pn = pinfo[i].packageName
+                if (pn == "com.tencent.mm") {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     @SuppressLint("SetTextI18n")
@@ -35,9 +49,10 @@ class MainActivity : BaseActivity() {
 
         }
 
+        isWxInstall()
         setFitsSystemWindows()
 
-        binding.textView.text = "渠道号：" + getApplicationChannel()
+        binding.textView.text = "渠道号：" + getApplicationChannel() + isWxInstall()
 
 //        val filePath = "/storage/emulated/.../7ac389230d004e2dac6a7c6bb484c017.jpg"
 //        val suffix = FileUtils.getSuffixName(filePath)
