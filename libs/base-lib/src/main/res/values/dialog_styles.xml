@@ -1,0 +1,73 @@
+<resources>
+
+    <style name="style_custom_dialog" parent="@android:style/Theme.Dialog">
+        <!--去掉边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--悬浮-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否半透明-->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--不需要标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--允许模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--全屏-->
+        <item name="android:windowFullscreen">false</item>
+        <!--不设置，8.0、魅族手机为蓝色-->
+        <item name="android:statusBarColor">@color/transparent</item>
+
+        <!--   隐藏标题栏   -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!--   沉浸导航栏 -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <!--BaseBottomSheetDialog-->
+    <style name="baseBottomDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
+
+    <!--去除BaseBottomSheetDialogFragment布局的默认白色背景-->
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>\
+    </style>
+
+
+    <style name="BaseBottomFragmentStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <!--对底部虚拟按键适配-->
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+
+        <!--去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--  是否半透明      -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--  是否模糊      -->
+        <item name="android:backgroundDimEnabled">false</item>
+
+        <!--设置一个20%的透明度-->
+        <item name="android:windowBackground">#66000000</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:colorBackground">#66000000</item>
+
+        <item name="bottomSheetStyle">@style/CustomBottomFragmentStyle</item>
+
+    </style>
+
+    <!--去除BaseBottomSheetDialogFragment布局的默认白色背景-->
+    <style name="CustomBottomFragmentStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>\
+        <item name="android:windowBackground">#66000000</item>
+    </style>
+
+</resources>

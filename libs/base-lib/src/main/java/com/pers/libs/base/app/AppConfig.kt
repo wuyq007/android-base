@@ -10,7 +10,7 @@ import android.os.Build
 import android.util.DisplayMetrics
 import com.pers.libs.base.SystemInfo
 import com.pers.libs.base.utils.DataStoreUtils
-import com.pers.libs.base.utils.EncodedUtils
+import com.pers.libs.base.utils.CodedUtils
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -124,7 +124,7 @@ object AppConfig {
                         systemStr.hashCode().toLong(),
                         SystemInfo.serial.hashCode().toLong(),
                     )
-                    uniqueID = EncodedUtils.md5(systemStr, uuid.toString())
+                    uniqueID = CodedUtils.md5(systemStr, uuid.toString())
                     DataStoreUtils.saveString("ANDROID_DEVICE_UNIQUE_ID", uniqueID)
                 }
                 uniqueID
