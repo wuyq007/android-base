@@ -1,19 +1,26 @@
 package com.pers.libs.base
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
+import androidx.annotation.Size
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
+import com.example.android.base.base.lib.R
 import com.example.android.base.base.lib.databinding.ActivityBaseBinding
 import com.pers.libs.base.app.AppConfig
 import com.pers.libs.base.app.AppLifecycleObserver
 import com.pers.libs.base.app.addAppLifecycleObserver
 import com.pers.libs.base.app.removeAppLifecycleObserver
+import com.pers.libs.base.utils.ScreenUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -31,21 +38,25 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
         get() = mainJob + Dispatchers.Main
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        mContext = AppConfig.application.applicationContext
-        mActivity = this
         super.onCreate(savedInstanceState)
         baseBinding = ActivityBaseBinding.inflate(layoutInflater)
         super.setContentView(baseBinding.root)
+
+        mContext = AppConfig.application.applicationContext
+        mActivity = this
+
         // 创建 Job （用于管理CoroutineScope中的所有携程）
         mainJob = Job()
 
         initViews()
+
+        enabledAppLifecycleObserver()
     }
 
     private fun initViews() {
-        baseBinding.tvBaseTitleLeft.setOnClickListener { finish() }
+        baseBinding.baseTitleLeftImage.setOnClickListener { finish() }
+        baseBinding.baseTitleRightImage.visibility = View.GONE
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -75,7 +86,6 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-
     open fun onAppStart() {
         Log.e("AAA", "程序回到前台")
     }
@@ -84,35 +94,64 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
         Log.e("AAA", "程序最小化到后台")
     }
 
-    /**
-     * 隐藏标题栏，如果标题栏默认显示的话
-     */
-    open fun hideTitleBar() {
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+    open fun hideTitleLayout() {
+        baseBinding.baseTitleLayout.visibility = View.GONE
     }
 
-    /**
-     * 沉浸式预留状态栏高度
-     */
-    open fun setFitsSystemWindows(
-        view: View = findViewById<ViewGroup>(android.R.id.content).getChildAt(
-            0
-        )
-    ) {
-        view.fitsSystemWindows = true
-    }
-
-
-    protected open fun getTitleText(): String? {
-        return baseBinding.tvBaseTitle.text.toString()
+    protected open fun getTitleView(): AppCompatTextView {
+        return baseBinding.baseTitleView
     }
 
     /**
      * 设置标题名称
      */
-    protected open fun setTitleText(titleStr: String?) {
-        baseBinding.tvBaseTitle.text = titleStr
+    protected open fun setTitleText(titleStr: String) {
+        baseBinding.baseTitleView.text = titleStr
     }
+
+    /**
+     * 左边图标
+     */
+    protected open fun getTitleLeftImage(): AppCompatImageView {
+        return baseBinding.baseTitleLeftImage
+    }
+
+    /**
+     * 标题左边文字
+     */
+    protected open fun getTitleLeftText(): AppCompatTextView {
+        return baseBinding.baseTitleLeftText
+    }
+
+    /**
+     * 设置标题文字文字
+     */
+    protected open fun setTitleLeftText(text: String) {
+        baseBinding.baseTitleLeftText.text = text
+    }
+
+    /**
+     * 标题右边文字
+     */
+    protected open fun getTitleRightText(): AppCompatTextView {
+        return baseBinding.baseTitleRightText
+    }
+
+    /**
+     * 设置标题右边文字
+     */
+    protected open fun setTitleRightText(text: String) {
+        baseBinding.baseTitleRightText.text = text
+    }
+
+
+    /**
+     * 右边图标
+     */
+    protected open fun getTitleRightImage(): AppCompatImageView {
+        return baseBinding.baseTitleRightImage
+    }
+
 
     /**
      * 隐藏默认标题栏下的分割线
@@ -130,6 +169,50 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
      */
     protected open fun setContentLayout(@LayoutRes layoutResId: Int) {
         LayoutInflater.from(this).inflate(layoutResId, baseBinding.baseContentLayout, true)
+    }
+
+    protected open fun setContentLayout(view: View) {
+        baseBinding.baseContentLayout.addView(view)
+    }
+
+
+    /**
+     * 状态栏图标深色
+     */
+    open fun setStartBarModule(isDark: Boolean) {
+        ScreenUtils.setStartBarModule(this, isDark)
+    }
+
+    /**
+     * 状态栏深（非沉浸式状态栏才生效）
+     */
+    open fun setStartBarBackgroundColor(@ColorInt colorId: Int) {
+        ScreenUtils.setStartBarBackgroundColor(this, colorId)
+    }
+
+    open fun setStartBarBackgroundColo(@Size(min = 1) colorString: String) {
+        ScreenUtils.setStartBarBackgroundColoString(this, colorString)
+    }
+
+    open fun setStartBarBackgroundColorResource(@ColorRes colorId: Int) {
+        ScreenUtils.setStartBarBackgroundColorResource(this, colorId)
+    }
+
+
+    /**
+     * 开启沉浸式状态栏
+     */
+    open fun enableStartBarImmersive() {
+        ScreenUtils.enableStartBarImmersive(this)
+        setFitsSystemWindows(baseBinding.baseTitleLayout)
+    }
+
+    /**
+     * 沉浸式预留状态栏高度,
+     * @param view 给 这个View 加上一个状态栏高度的 paddingTop
+     */
+    open fun setFitsSystemWindows(view: View = findViewById<ViewGroup>(android.R.id.content).getChildAt(0)) {
+        view.fitsSystemWindows = true
     }
 
 }

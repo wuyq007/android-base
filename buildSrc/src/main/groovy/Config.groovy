@@ -82,10 +82,11 @@ class Config {
                     'androidx.datastore:datastore-preferences-core:1.0.0'
             ],
             navigation: [
-                    "androidx.navigation:navigation-fragment:${versions.nav_version}",
+//                    "androidx.navigation:navigation-fragment:${versions.nav_version}",
                     "androidx.navigation:navigation-fragment-ktx:${versions.nav_version}",
-                    "androidx.navigation:navigation-ui:${versions.nav_version}",
-                    "androidx.navigation:navigation-ui-ktx:${versions.nav_version}",],
+//                    "androidx.navigation:navigation-ui:${versions.nav_version}",
+                    "androidx.navigation:navigation-ui-ktx:${versions.nav_version}",
+            ],
 
             paging    : "androidx.paging:paging-runtime:${versions.paging_version}",
             pagingTest: "androidx.paging:paging-common:${versions.paging_version}",

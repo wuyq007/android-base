@@ -14,12 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
-
-/**
- * @author : wuyq
- * Time : 2020/9/24 10:13
- * Description :
- */
+@Deprecated
 public abstract class BaseBottomDialog extends BottomSheetDialog {
 
     protected AppCompatActivity mActivity;

@@ -20,4 +20,8 @@ dependencies {
         implementation project(it)
     }
 
+//    implementation Config.jetpack.navigation
+
+    implementation 'com.github.JavaNoober.BackgroundLibrary:libraryx:1.7.6'
+
 }

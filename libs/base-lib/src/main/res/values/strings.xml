@@ -8,4 +8,6 @@
     <string name="to">前往</string>
     <string name="goBack">返回</string>
     <string name="iSee">我知道了</string>
+    <string name="title">标题</string>
+    <string name="detail">详情</string>
 </resources>

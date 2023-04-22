@@ -22,12 +22,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 /**
- * @author : wuyq
- * Time : 2020/9/24 13:45
- * Description :
+ * 推荐使用 DialogFragment，使用 Navigation 统一管理
  */
 public abstract class BaseBottomFragment extends BottomSheetDialogFragment {
-
 
     protected Context mContext;
 
@@ -69,9 +66,7 @@ public abstract class BaseBottomFragment extends BottomSheetDialogFragment {
 
     protected abstract void initView(View view);
 
-
     private BottomSheetDialog mBottomSheetDialog;
-
 
     private void getBottomSheetDialog() {
         if (mBottomSheetDialog == null) {
@@ -130,13 +125,13 @@ public abstract class BaseBottomFragment extends BottomSheetDialogFragment {
      * 是否可以下拉隐藏折叠状态
      * hideable=false:折叠状态时不能下拉隐藏
      */
-    public void setHideable(boolean hideable) {
+    public void setHideAble(boolean hideAble) {
         if (mBottomSheetDialog == null) {
             getBottomSheetDialog();
         }
         if (mBottomSheetDialog != null) {
             BottomSheetBehavior<?> behavior = mBottomSheetDialog.getBehavior();
-            behavior.setHideable(hideable);
+            behavior.setHideable(hideAble);
         }
     }
 
@@ -217,7 +212,7 @@ public abstract class BaseBottomFragment extends BottomSheetDialogFragment {
 
     @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
-        //重复添加 fragmenta 或者 DialogFragment.show 导致  java.lang.IllegalStateException
+        //重复添加 fragment 或者 DialogFragment.show 导致  java.lang.IllegalStateException
         if (isAdded()) {
             dismiss();
         }

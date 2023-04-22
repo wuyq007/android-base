@@ -15,7 +15,6 @@ object AesUtils {
     private const val AES_KEY_SIZE = 128
     private const val AES_BLOCK_SIZE = 16
 
-
     /**
      * AES加密
      */
