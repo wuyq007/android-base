@@ -19,7 +19,7 @@ object AppSigningUtils {
     /**
      * 获取签名MD5值
      */
-    fun getMD5(context: Context?): String {
+    fun getMD5(): String {
         var res = ""
         val list = getSignInfo(MD5)
         if (list != null && list.size > 0) {

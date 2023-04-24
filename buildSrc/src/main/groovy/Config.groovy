@@ -111,5 +111,10 @@ class Config {
     ]
 
 
+    public static commonView = [
+            background    : 'com.github.JavaNoober.BackgroundLibrary:libraryx:1.7.6'
+    ]
+
+
 
 }

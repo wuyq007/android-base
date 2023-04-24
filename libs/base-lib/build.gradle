@@ -17,4 +17,6 @@ dependencies {
 
     implementation Config.jetpack.datastore
 
+    implementation Config.commonView.background
+
 }

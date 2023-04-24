@@ -1,5 +1,6 @@
 package com.pers.libs.base.utils
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.view.View
@@ -12,7 +13,129 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.pers.libs.base.app.AppConfig
+
+fun AppCompatActivity.dp2px(dp: Float): Float {
+    return ScreenUtils.dp2px(dp)
+}
+
+fun AppCompatActivity.dp2px(dp: Int): Int {
+    return ScreenUtils.dp2px(dp)
+}
+
+fun AppCompatActivity.px2dp(dp: Float): Float {
+    return ScreenUtils.px2dp(dp)
+}
+
+fun AppCompatActivity.px2dp(dp: Int): Int {
+    return ScreenUtils.px2dp(dp)
+}
+
+fun AppCompatActivity.sp2px(dp: Float): Float {
+    return ScreenUtils.sp2px(dp)
+}
+
+fun AppCompatActivity.sp2px(dp: Int): Int {
+    return ScreenUtils.sp2px(dp)
+}
+
+fun AppCompatActivity.px2sp(dp: Float): Float {
+    return ScreenUtils.px2sp(dp)
+}
+
+fun AppCompatActivity.px2sp(dp: Int): Int {
+    return ScreenUtils.px2sp(dp)
+}
+
+fun Fragment.dp2px(dp: Float): Float {
+    return ScreenUtils.dp2px(dp)
+}
+
+fun Fragment.dp2px(dp: Int): Int {
+    return ScreenUtils.dp2px(dp)
+}
+
+fun Fragment.px2dp(dp: Float): Float {
+    return ScreenUtils.px2dp(dp)
+}
+
+fun Fragment.px2dp(dp: Int): Int {
+    return ScreenUtils.px2dp(dp)
+}
+
+fun Fragment.sp2px(dp: Float): Float {
+    return ScreenUtils.sp2px(dp)
+}
+
+fun Fragment.sp2px(dp: Int): Int {
+    return ScreenUtils.sp2px(dp)
+}
+
+fun Fragment.px2sp(dp: Float): Float {
+    return ScreenUtils.px2sp(dp)
+}
+
+fun Fragment.px2sp(dp: Int): Int {
+    return ScreenUtils.px2sp(dp)
+}
+
+
+fun AppCompatActivity.enableStartBarImmersive() {
+    ScreenUtils.enableStartBarImmersive(this)
+}
+
+fun AppCompatActivity.setStartBarModule(sDark: Boolean = false) {
+    ScreenUtils.setStartBarModule(this, sDark)
+}
+
+fun AppCompatActivity.setStartBarBackgroundColorResource(@ColorRes colorId: Int) {
+    ScreenUtils.setStartBarBackgroundColorResource(this, colorId)
+}
+
+fun AppCompatActivity.setStartBarBackgroundColoString(@Size(min = 1) colorString: String) {
+    ScreenUtils.setStartBarBackgroundColoString(this, colorString)
+}
+
+fun AppCompatActivity.setStartBarBackgroundColor(@ColorInt colorInt: Int) {
+    ScreenUtils.setStartBarBackgroundColor(this, colorInt)
+}
+
+fun AppCompatActivity.hideNavigationBar(isHide: Boolean = false) {
+    ScreenUtils.hideNavigationBar(this, isHide)
+}
+
+fun AppCompatActivity.hideStartBar(isHide: Boolean = false) {
+    ScreenUtils.hideStartBar(this, isHide)
+}
+
+fun Fragment.enableStartBarImmersive() {
+    this.activity?.let { ScreenUtils.enableStartBarImmersive(it) }
+}
+
+fun Fragment.setStartBarModule(sDark: Boolean = false) {
+    this.activity?.let { ScreenUtils.setStartBarModule(it, sDark) }
+}
+
+fun Fragment.setStartBarBackgroundColorResource(@ColorRes colorId: Int) {
+    this.activity?.let { ScreenUtils.setStartBarBackgroundColorResource(it, colorId) }
+}
+
+fun Fragment.setStartBarBackgroundColoString(@Size(min = 1) colorString: String) {
+    this.activity?.let { ScreenUtils.setStartBarBackgroundColoString(it, colorString) }
+}
+
+fun Fragment.setStartBarBackgroundColor(@ColorInt colorInt: Int) {
+    this.activity?.let { ScreenUtils.setStartBarBackgroundColor(it, colorInt) }
+}
+
+fun Fragment.hideNavigationBar(isHide: Boolean = false) {
+    this.activity?.let { ScreenUtils.hideNavigationBar(it, isHide) }
+}
+
+fun Fragment.hideStartBar(isHide: Boolean = false) {
+    this.activity?.let { ScreenUtils.hideStartBar(it, isHide) }
+}
 
 
 object ScreenUtils {
@@ -64,7 +187,7 @@ object ScreenUtils {
     /**
      * 启用沉浸式状态栏
      */
-    fun enableStartBarImmersive(activity: AppCompatActivity) {
+    fun enableStartBarImmersive(activity: Activity) {
         val window: Window = activity.window
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.statusBarColor = Color.TRANSPARENT;
@@ -84,7 +207,7 @@ object ScreenUtils {
      * 设置状态栏深色模式
      *  @param isDark 是否深色模式
      */
-    fun setStartBarModule(activity: AppCompatActivity, isDark: Boolean = false) {
+    fun setStartBarModule(activity: Activity, isDark: Boolean = false) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val controller = ViewCompat.getWindowInsetsController(activity.window.decorView)
             if (controller != null) {
@@ -104,15 +227,15 @@ object ScreenUtils {
     /**
      * 设置状态栏背景颜色
      */
-    fun setStartBarBackgroundColorResource(activity: AppCompatActivity, @ColorRes colorId: Int) {
+    fun setStartBarBackgroundColorResource(activity: Activity, @ColorRes colorId: Int) {
         setStartBarBackgroundColor(activity, ContextCompat.getColor(activity.applicationContext, colorId))
     }
 
-    fun setStartBarBackgroundColoString(activity: AppCompatActivity, @Size(min = 1) colorString: String) {
+    fun setStartBarBackgroundColoString(activity: Activity, @Size(min = 1) colorString: String) {
         setStartBarBackgroundColor(activity, Color.parseColor(colorString))
     }
 
-    fun setStartBarBackgroundColor(activity: AppCompatActivity, @ColorInt colorInt: Int) {
+    fun setStartBarBackgroundColor(activity: Activity, @ColorInt colorInt: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity.window.statusBarColor = colorInt
         }
@@ -121,7 +244,7 @@ object ScreenUtils {
     /**
      * 隐藏导航栏
      */
-    fun hideNavigationBar(activity: AppCompatActivity, isHide: Boolean = false) {
+    fun hideNavigationBar(activity: Activity, isHide: Boolean = false) {
         val decorView: View = activity.window.decorView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val controller = ViewCompat.getWindowInsetsController(decorView)
@@ -148,7 +271,7 @@ object ScreenUtils {
     /**
      * 隐藏状态栏
      */
-    fun hideStartBar(activity: AppCompatActivity, isHide: Boolean = false) {
+    fun hideStartBar(activity: Activity, isHide: Boolean = false) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val controller = ViewCompat.getWindowInsetsController(activity.window.decorView)
             if (controller != null) {

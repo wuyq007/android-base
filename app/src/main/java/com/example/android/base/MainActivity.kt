@@ -16,6 +16,7 @@ import com.example.android.base.databinding.ActivityMainBinding
 import com.pers.libs.base.BaseActivity
 import com.pers.libs.base.app.AppConfig
 import com.pers.libs.base.utils.ScreenUtils
+import com.pers.libs.base.utils.hideNavigationBar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -35,6 +36,8 @@ class MainActivity : BaseActivity() {
         setStartBarModule(true)
 
         setContent()
+
+        hideNavigationBar()
 
         launch {
 

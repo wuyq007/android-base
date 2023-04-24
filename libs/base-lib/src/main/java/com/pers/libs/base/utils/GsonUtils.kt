@@ -7,6 +7,35 @@ import com.google.gson.JsonSyntaxException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
+
+fun Any.toJson(): String? {
+    return GsonUtils.toJson(this)
+}
+
+fun <T> String.fromJson(clazz: Type): T {
+    return GsonUtils.fromJson(this, clazz)
+}
+
+fun <T> String.fromJson(tClass: Class<T>): T {
+    return GsonUtils.fromJson(this, tClass)
+}
+
+fun <T> JsonElement.fromJson(clazz: Type): T {
+    return GsonUtils.fromJson(this, clazz)
+}
+
+fun <T> JsonElement.fromJson(tClass: Class<T>): T {
+    return GsonUtils.fromJson(this, tClass)
+}
+
+fun <T> String.fromJsonList(tClass: Class<T>): MutableList<T>? {
+    return GsonUtils.fromJsonList(this, tClass)
+}
+
+fun <T> JsonElement.fromJsonList(tClass: Class<T>): MutableList<T>? {
+    return GsonUtils.fromJsonList(this, tClass)
+}
+
 object GsonUtils {
 
     private val GSON: Gson by lazy { GsonBuilder().create() }
@@ -20,23 +49,47 @@ object GsonUtils {
      * Json 转对象 T
      */
     @Throws(Exception::class)
-    fun <T> fromJson(jsonElement: String?, clazz: Type?): T {
+    fun <T> fromJson(jsonString: String?, clazz: Type): T {
+        return GSON.fromJson(jsonString, clazz)
+    }
+
+    @Throws(Exception::class)
+    fun <T> fromJson(jsonString: String?, tClass: Class<T>): T {
+        return GSON.fromJson(jsonString, tClass)
+    }
+
+    @Throws(Exception::class)
+    fun <T> fromJson(jsonElement: JsonElement?, clazz: Type): T {
         return GSON.fromJson(jsonElement, clazz)
     }
 
     @Throws(Exception::class)
-    fun <T> fromJson(jsonElement: JsonElement?, tClass: Class<T>?): T {
+    fun <T> fromJson(jsonElement: JsonElement?, tClass: Class<T>): T {
         return GSON.fromJson(jsonElement, tClass)
     }
 
-    @Throws(Exception::class)
-    fun <T> fromJson(jsonElement: String?, tClass: Class<T>?): T {
-        return GSON.fromJson(jsonElement, tClass)
-    }
 
     /**
      * Json 转 List<T>
      */
+    @Throws(Exception::class)
+    fun <T> fromJsonList(jsonString: String?, tClass: Class<T>): MutableList<T>? {
+        val objectType: Type = object : ParameterizedType {
+            override fun getActualTypeArguments(): Array<Type> {
+                return arrayOf(tClass)
+            }
+
+            override fun getRawType(): Type {
+                return MutableList::class.java
+            }
+
+            override fun getOwnerType(): Type? {
+                return null
+            }
+        }
+        return GSON.fromJson(jsonString, objectType)
+    }
+
     @Throws(Exception::class)
     fun <T> fromJsonList(jsonElement: JsonElement?, tClass: Class<T>): MutableList<T>? {
         val objectType: Type = object : ParameterizedType {
