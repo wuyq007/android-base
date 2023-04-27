@@ -10,7 +10,7 @@ object SDCardUtils {
 
 
     val SDCardFilesPath: String? by lazy { Holder.getSDCardFilesPath() }
-    val SDCardCachePath: String? by lazy { Holder.getSDCardFilesPath() }
+    val SDCardCachePath: String? by lazy { Holder.getSDCardCachePath() }
     val SDCardDownloadFilesPath: String? by lazy { Holder.getDownloadFilesPath() }
     val SDCardDownloadCachePath: String? by lazy { Holder.getDownloadCreatePath() }
 
