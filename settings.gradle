@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "android-base"
 include ':app'
 include ':libs:base-lib'
-include ':libs:http-lib'
+include ':libs:net-lib'
+include ':common:view-common'

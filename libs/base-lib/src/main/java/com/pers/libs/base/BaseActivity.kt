@@ -1,7 +1,6 @@
 package com.pers.libs.base
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,12 +13,11 @@ import androidx.annotation.Size
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import com.example.android.base.base.lib.R
-import com.example.android.base.base.lib.databinding.ActivityBaseBinding
 import com.pers.libs.base.app.AppConfig
 import com.pers.libs.base.app.AppLifecycleObserver
 import com.pers.libs.base.app.addAppLifecycleObserver
 import com.pers.libs.base.app.removeAppLifecycleObserver
+import com.pers.libs.base.databinding.ActivityBaseBinding
 import com.pers.libs.base.utils.ScreenUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

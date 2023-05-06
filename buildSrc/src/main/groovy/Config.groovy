@@ -14,7 +14,7 @@ class Config {
      * 各个模块名称
      */
     public static modules = [
-            libs  : [':libs:base-lib', ':libs:http-lib'],
+            libs  : [':libs:base-lib', ':libs:net-lib'],
             module: [],
             common: [],
     ]

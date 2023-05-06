@@ -5,7 +5,7 @@ apply {
 }
 
 android {
-    namespace Config.applicationId + suffix
+
     compileSdk Config.compileSdk
 
     println("namespace:" + namespace)

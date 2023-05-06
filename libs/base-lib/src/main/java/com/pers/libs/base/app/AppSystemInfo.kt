@@ -1,14 +1,13 @@
-package com.pers.libs.base
+package com.pers.libs.base.app
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.provider.Settings
-import com.pers.libs.base.app.AppConfig
 import java.util.*
 
 
 @SuppressLint("HardwareIds")
-object SystemInfo {
+object AppSystemInfo {
 
     /**
      * 获取当前手机系统语言。

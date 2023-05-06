@@ -18,8 +18,5 @@ dependencies {
     Config.square.each {
         implementation it.value
     }
-//    implementation Config.square.retrofit
-//    implementation Config.square.okhttp
-//    implementation Config.square.okio
 
 }

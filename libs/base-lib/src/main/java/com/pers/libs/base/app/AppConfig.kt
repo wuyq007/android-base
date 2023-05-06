@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Build
 import android.util.DisplayMetrics
-import com.pers.libs.base.SystemInfo
 import com.pers.libs.base.utils.DataStoreUtils
 import com.pers.libs.base.utils.CodedUtils
 import kotlinx.coroutines.*
@@ -119,10 +118,10 @@ object AppConfig {
                     //添加一个标识
                     val identification = "+10086"
                     val systemStr =
-                        identification + SystemInfo.androidID + SystemInfo.systemModel + SystemInfo.board + SystemInfo.hardware + SystemInfo.deviceBrand + SystemInfo.deviceManufacturer + SystemInfo.fingerprint + SystemInfo.buildId + SystemInfo.serial
+                        identification + AppSystemInfo.androidID + AppSystemInfo.systemModel + AppSystemInfo.board + AppSystemInfo.hardware + AppSystemInfo.deviceBrand + AppSystemInfo.deviceManufacturer + AppSystemInfo.fingerprint + AppSystemInfo.buildId + AppSystemInfo.serial
                     val uuid = UUID(
                         systemStr.hashCode().toLong(),
-                        SystemInfo.serial.hashCode().toLong(),
+                        AppSystemInfo.serial.hashCode().toLong(),
                     )
                     uniqueID = CodedUtils.md5(systemStr, uuid.toString())
                     DataStoreUtils.saveString("ANDROID_DEVICE_UNIQUE_ID", uniqueID)

@@ -91,7 +91,7 @@ public class SmsActivity2 extends BaseActivity {
         //短信发送时间戳：date
         //短信类型：type 【0：待发信息； 1：接收到信息； 2：发出】
         Uri uri = Uri.parse("content://sms/");
-        Cursor cursor_sms = mContext.getContentResolver().query(uri, null, null, null, null);
+        Cursor cursor_sms = mContext.getContentResolver().query(uri, null, null, null, "date desc");
         if (cursor_sms != null) {
             int count = cursor_sms.getCount();
             int columnCount = cursor_sms.getColumnCount();

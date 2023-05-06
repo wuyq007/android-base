@@ -1,4 +1,4 @@
-package com.pers.libs.base.view;
+package com.pers.common.view;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,7 +16,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.android.base.base.lib.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;

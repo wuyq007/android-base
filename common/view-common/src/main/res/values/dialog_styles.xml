@@ -27,20 +27,6 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <!--BaseBottomSheetDialog-->
-    <style name="baseBottomDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
-    </style>
-
-    <!--去除BaseBottomSheetDialogFragment布局的默认白色背景-->
-    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>\
-    </style>
-
 
     <style name="BaseBottomFragmentStyle" parent="Theme.Design.Light.BottomSheetDialog">
         <!--对底部虚拟按键适配-->
