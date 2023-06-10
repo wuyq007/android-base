@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Build
+import android.os.Looper
 import android.util.DisplayMetrics
 import com.pers.libs.base.utils.DataStoreUtils
 import com.pers.libs.base.utils.CodedUtils
@@ -17,53 +18,78 @@ object AppConfig {
 
     private lateinit var app: Application
 
+    @JvmStatic
     fun init(app: Application) {
         AppConfig.app = app
+    }
+
+    @JvmStatic
+    fun isMainThread(): Boolean {
+        return Looper.getMainLooper().thread == Thread.currentThread()
+    }
+
+    @JvmStatic
+    fun currentThreadName(): String {
+        return Thread.currentThread().name
+    }
+
+    @JvmStatic
+    fun currentThreadId(): Long {
+        return Thread.currentThread().id
     }
 
     /**
      * 全局 Context
      */
+    @JvmStatic
     val application: Application by lazy { app }
 
     /**
      * 获取应用包名
      */
+    @JvmStatic
     val packageName: String by lazy { app.packageName }
 
     /**
      * 获取应用版本名称
      */
+    @JvmStatic
     val versionName: String by lazy { Holder.APP_VERSION_NAME }
 
     /**
      * 获取应用版本Code
      */
+    @JvmStatic
     val versionCode: Long by lazy { Holder.APP_VERSION_CODE }
 
     /**
      * 获取状态栏高度
      */
+    @JvmStatic
     val statusBarHeight: Int by lazy { Holder.APP_STATUS_BAR_HEIGHT }
 
     /**
      * 获取屏幕宽度
      */
+    @JvmStatic
     val screenWidth: Int by lazy { Holder.APP_SCREEN_WIDTH }
 
     /**
      * 获取屏幕高度
      */
+    @JvmStatic
     val screenHeight: Int by lazy { Holder.APP_SCREEN_HEIGHT }
 
     /**
      * 判断当前是否是debug模式
      */
+    @JvmStatic
     val isDebug: Boolean by lazy { Holder.APP_IS_DEBUG }
 
     /**
      * 设备ID
      */
+    @JvmStatic
     val deviceId: String by lazy { Holder.ANDROID_DEVICE_UNIQUE_ID }
 
 

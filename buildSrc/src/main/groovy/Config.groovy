@@ -26,6 +26,12 @@ class Config {
             paging_version: '3.1.1',
             nav_version   : '2.5.3',
             room_version  : '2.5.0',
+
+//            //targetSdk 31
+//            lifecycle_version   : '2.5.1',
+
+            //targetSdk 30
+            lifecycle_version   : '2.3.1',
     ]
 
     /**
@@ -81,6 +87,31 @@ class Config {
                     'androidx.datastore:datastore-preferences:1.0.0',
                     'androidx.datastore:datastore-preferences-core:1.0.0'
             ],
+
+            lifecycle:[
+                    "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle_version}",
+
+                    //
+//                    "androidx.lifecycle:lifecycle-viewmodel-compose:${versions.lifecycle_version}",
+                    "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle_version}",
+                    "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle_version}",
+
+                    // Saved state module for ViewModel
+                    "androidx.lifecycle:lifecycle-viewmodel-savedstate:${versions.lifecycle_version}",
+                    // alternately - if using Java8, use the following instead of lifecycle-compiler
+                    "androidx.lifecycle:lifecycle-common-java8:${versions.lifecycle_version}",
+                    // optional - helpers for implementing LifecycleOwner in a Service
+                    "androidx.lifecycle:lifecycle-service:${versions.lifecycle_version}",
+                    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+                    "androidx.lifecycle:lifecycle-process:${versions.lifecycle_version}",
+                    // optional - ReactiveStreams support for LiveData
+                    "androidx.lifecycle:lifecycle-reactivestreams-ktx:${versions.lifecycle_version}",
+            ],
+
+            kapt_lifecycle:[
+                    "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle_version}",
+            ],
+
             navigation: [
 //                    "androidx.navigation:navigation-fragment:${versions.nav_version}",
                     "androidx.navigation:navigation-fragment-ktx:${versions.nav_version}",

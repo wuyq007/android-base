@@ -19,9 +19,10 @@ import com.pers.libs.base.app.addAppLifecycleObserver
 import com.pers.libs.base.app.removeAppLifecycleObserver
 import com.pers.libs.base.databinding.ActivityBaseBinding
 import com.pers.libs.base.utils.ScreenUtils
+import kotlinx.coroutines.CompletableJob
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlin.coroutines.CoroutineContext
 
 open class BaseActivity : AppCompatActivity(), CoroutineScope {
@@ -31,7 +32,7 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var baseBinding: ActivityBaseBinding
 
-    private lateinit var mainJob: Job
+    private lateinit var mainJob: CompletableJob
     override val coroutineContext: CoroutineContext
         get() = mainJob + Dispatchers.Main
 
@@ -44,7 +45,7 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
         mActivity = this
 
         // 创建 Job （用于管理CoroutineScope中的所有携程）
-        mainJob = Job()
+        mainJob = SupervisorJob()
 
         initViews()
 
@@ -209,7 +210,11 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
      * 沉浸式预留状态栏高度,
      * @param view 给 这个View 加上一个状态栏高度的 paddingTop
      */
-    open fun setFitsSystemWindows(view: View = findViewById<ViewGroup>(android.R.id.content).getChildAt(0)) {
+    open fun setFitsSystemWindows(
+        view: View = findViewById<ViewGroup>(android.R.id.content).getChildAt(
+            0
+        )
+    ) {
         view.fitsSystemWindows = true
     }
 
