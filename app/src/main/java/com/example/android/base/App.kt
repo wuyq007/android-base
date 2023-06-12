@@ -1,6 +1,7 @@
 package com.example.android.base
 
-import com.pers.libs.base.BaseApplication
+import androidx.multidex.MultiDexApplication
+import com.pers.base.lib.BaseApplication
 
 class App : BaseApplication() {
 

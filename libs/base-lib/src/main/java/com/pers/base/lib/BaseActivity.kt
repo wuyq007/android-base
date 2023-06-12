@@ -1,23 +1,22 @@
-package com.pers.libs.base
+package com.pers.base.lib
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import kotlinx.coroutines.CompletableJob
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-open class BaseFragment : Fragment(), CoroutineScope {
+open class BaseActivity : AppCompatActivity(), CoroutineScope {
 
-    private lateinit var job: CompletableJob
+    private lateinit var job: Job
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        job = SupervisorJob()
+        job = Job()
     }
 
     override fun onDestroy() {

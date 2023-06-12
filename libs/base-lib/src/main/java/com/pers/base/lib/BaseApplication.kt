@@ -1,13 +1,12 @@
-package com.pers.libs.base
+package com.pers.base.lib
 
 import androidx.multidex.MultiDexApplication
-import com.pers.libs.base.app.AppConfig
 
 open class BaseApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
         AppConfig.init(this)
-
     }
+
 }

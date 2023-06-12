@@ -16,10 +16,6 @@ android {
 
 dependencies {
 
-    Config.modules.libs.each {
-        implementation project(it)
-    }
-
-    implementation Config.commonView.background
+    implementation project(Config.modules.base)
 
 }

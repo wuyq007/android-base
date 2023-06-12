@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.AndroidBaseStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.AndroidBaseLib" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -10,20 +10,7 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <!-- <item name="android:statusBarColor">?attr/colorPrimaryVariant</item> -->
-        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
-<!--        &lt;!&ndash;   沉浸状态栏 &ndash;&gt;-->
-<!--        <item name="android:windowTranslucentStatus">true</item>-->
-<!--        <item name="android:windowTranslucentNavigation">true</item>-->
-
-        <!--   隐藏标题栏   -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
     </style>
-
-
 </resources>
