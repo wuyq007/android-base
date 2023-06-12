@@ -1,10 +1,10 @@
-package com.pers.base.lib.utils
+package com.pers.libs.base.utils
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
-import com.pers.base.lib.AppConfig
+import com.pers.libs.base.app.AppConfig
 import kotlinx.coroutines.flow.*
 import java.io.IOException
 import kotlin.properties.Delegates
@@ -14,8 +14,9 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "da
 
 object DataStoreUtils {
 
-    private val context: () -> Context = { AppConfig.getContext() }
-    private val dataStore = context().dataStore
+    private val dataStore: DataStore<Preferences> by lazy {
+        AppConfig.application.dataStore
+    }
 
     suspend fun saveInt(key: String, value: Int) {
         dataStore.edit {

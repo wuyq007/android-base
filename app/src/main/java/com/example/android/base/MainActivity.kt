@@ -1,63 +1,51 @@
 package com.example.android.base
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import com.example.android.base.databinding.ActivityMainBinding
-import com.pers.base.lib.BaseActivity
-import com.pers.base.lib.utils.DataStoreUtils
+import com.pers.libs.base.BaseActivity
+import com.pers.libs.base.app.AppConfig
+import com.pers.libs.base.utils.hideNavigationBar
 import kotlinx.coroutines.launch
+
 
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    var screenWidth = AppConfig.screenWidth
+    var screenHeight = AppConfig.screenHeight
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentLayout(binding.root)
+        setStartBarModule(true)
 
+        setContent()
+
+        hideNavigationBar()
 
         launch {
-            val testFloat = DataStoreUtils.getFloat("testFlow")
-            Log.e("flow", "testFloat: $testFloat")
+
         }
 
+        binding.tvContent.setOnClickListener {
+            startActivity(Intent(this, SmsActivity2::class.java))
+        }
 
-//        launch {
-//            DataStoreUtils.apply {
-//                saveInt("testInt", 18)
-//                saveFloat("testFloat", 18F)
-//                saveDouble("testDouble", 18.0)
-//                saveLong("testLong", 18L)
-//                saveBoolean("testBoolean", true)
-//                saveString("testString", "哈哈哈哈")
-//            }
-//
-//            DataStoreUtils.apply {
-//                Log.e("AAA", "is testInt:${contains("testInt")}")
-//                Log.e("AAA", "is testFloat:${contains("testFloat")}")
-//                Log.e("AAA", "is testDouble:${contains("testDouble")}")
-//                Log.e("AAA", "is testLong:${contains("testLong")}")
-//                Log.e("AAA", "is testBoolean:${contains("testBoolean")}")
-//                Log.e("AAA", "is testString:${contains("testString")}")
-//
-//                val testInt = getInt("testInt")
-//                val testFloat = getFloat("testFloat")
-//                val testDouble = getDouble("testDouble")
-//                val testLong = getLong("testLong")
-//                val testBoolean = getBoolean("testBoolean")
-//                val testString = getString("testString")
-////
-//                Log.e("AAA", "testInt:$testInt")
-//                Log.e("AAA", "testFloat:$testFloat")
-//                Log.e("AAA", "testDouble:$testDouble")
-//                Log.e("AAA", "testLong:$testLong")
-//                Log.e("AAA", "testBoolean:$testBoolean")
-//                Log.e("AAA", "testString:$testString")
-//            }
-//        }
+    }
 
+    private fun setContent() {
+        val stringBuilder = StringBuilder()
+        stringBuilder.append("API 版本：").append(Build.VERSION.SDK_INT).append("\n")
+        stringBuilder.append("screenWidth：").append(screenWidth).append("\n")
+        stringBuilder.append("screenHeight：").append(screenHeight).append("\n")
+        stringBuilder.append("statusBarHeight：").append(AppConfig.statusBarHeight).append("\n")
+        binding.tvContent.text = stringBuilder.toString()
     }
 
 }

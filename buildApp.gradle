@@ -5,7 +5,9 @@ apply {
 }
 
 android {
-    namespace Config.applicationId
+
+    //
+//    namespace Config.applicationId
     compileSdk Config.compileSdk
 
     defaultConfig {
@@ -46,12 +48,14 @@ android {
     buildTypes {
         debug {
             minifyEnabled true
+            zipAlignEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
         release {
             minifyEnabled true
+            zipAlignEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
