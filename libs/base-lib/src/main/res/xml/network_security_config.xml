@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--信任所有cer证书和代理-->
+    <base-config cleartextTrafficPermitted="true"/>
+    <!-- 只在debug 环境下信任证书，使抓包时能支持百度地图，友盟，微信登录等 -->
+    <debug-overrides>
+        <trust-anchors>
+            <!--信任用户安装的证书-->
+            <certificates overridePins="true" src="user" />
+            <certificates overridePins="true" src="system"  />
+        </trust-anchors>
+    </debug-overrides>
+
+
+</network-security-config>

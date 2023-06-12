@@ -1,0 +1,19 @@
+apply {
+    from "${project.rootDir.path}/buildLibrary.gradle"
+}
+
+android {
+    defaultConfig {
+
+    }
+
+    buildTypes {
+
+    }
+}
+
+dependencies {
+
+    implementation project(":libs:base-lib")
+
+}
