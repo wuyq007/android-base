@@ -20,6 +20,8 @@ dependencies {
         implementation project(it)
     }
 
+    implementation Config.jetpack.lifecycle
+
     implementation Config.commonView.background
 
 }

@@ -1,7 +1,6 @@
 package com.pers.libs.net
 
-class ResponseBean<T> : java.io.Serializable {
-
+class LoginResponse : java.io.Serializable {
     /**
      *
      */
@@ -12,11 +11,10 @@ class ResponseBean<T> : java.io.Serializable {
      */
     var errorMsg: String? = null
 
-    /**
-     * 业务参数
-     */
-    var data: T? = null
+//    /**
+//     * 业务参数
+//     */
+//    var data: T? = null
 
     var succeed: Boolean = errorCode == 0
-
 }

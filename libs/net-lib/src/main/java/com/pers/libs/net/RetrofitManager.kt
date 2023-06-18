@@ -21,7 +21,7 @@ class RetrofitManager {
         fun getInstance() = SingletonHolder.INSTANCE
     }
 
-    object SingletonHolder {
+    private object SingletonHolder {
         val INSTANCE = RetrofitManager()
     }
 

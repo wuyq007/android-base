@@ -55,6 +55,7 @@
 
         <activity android:name=".RoundedActivity" />
         <activity android:name=".SmsActivity2" />
+        <activity android:name=".net.WanAndroidApiActivity" />
 
         <receiver android:name=".SmsReceiver">
             <intent-filter android:priority="2147483647">

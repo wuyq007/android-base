@@ -1,14 +1,13 @@
 package com.example.android.base
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.example.android.base.databinding.ActivityMainBinding
+import com.example.android.base.net.WanAndroidApiActivity
 import com.pers.libs.base.BaseActivity
 import com.pers.libs.base.app.AppConfig
-import com.pers.libs.base.app.AppSystemInfo
 import com.pers.libs.base.app.AppSystemInfo.buildId
 import com.pers.libs.base.app.AppSystemInfo.systemVersion
 import com.pers.libs.base.utils.hideNavigationBar
@@ -24,7 +23,6 @@ class MainActivity : BaseActivity() {
     var screenWidth = AppConfig.screenWidth
     var screenHeight = AppConfig.screenHeight
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,7 +52,7 @@ class MainActivity : BaseActivity() {
         }
 
         binding.tvContent.setOnClickListener {
-            startActivity(Intent(this, SmsActivity2::class.java))
+            startActivity(Intent(this, WanAndroidApiActivity::class.java))
         }
 
     }

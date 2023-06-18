@@ -6,22 +6,22 @@ object OKHttpConfig {
      * URL域名
      */
     @JvmStatic
-    lateinit var BASE_URL: String
+    var BASE_URL: String = "https://www.wanandroid.com"
 
     /**
      * 连接超时时间 （s）
      */
-    var DEFAULT_TIME_OUT = 10L
+    var DEFAULT_TIME_OUT = 30L
 
     /**
      * 读写超时时间 （s）
      */
-    var DEFAULT_WRITE_TIME_OUT = 10L
+    var DEFAULT_WRITE_TIME_OUT = 30L
 
     /**
      * 读写超时时间 （s）
      */
-    var DEFAULT_READ_TIME_OUT = 10L
+    var DEFAULT_READ_TIME_OUT = 30L
 
     /**
      * 是否启用网络缓存

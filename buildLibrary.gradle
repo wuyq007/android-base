@@ -8,8 +8,6 @@ android {
 
     compileSdk Config.compileSdk
 
-    println("namespace:" + namespace)
-
     defaultConfig {
         minSdk Config.minSdk
         targetSdk Config.targetSdk

@@ -14,9 +14,9 @@ import kotlinx.coroutines.launch
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-object HttpObservable {
+object HttpObserver {
 
-    internal suspend inline fun <reified T> request(
+    suspend inline fun <reified T> post(
         url: String,
         params: HashMap<String, Any>,
         crossinline onSuccess: (T?) -> Unit = {},
@@ -24,13 +24,25 @@ object HttpObservable {
         crossinline onTimeout: (Throwable) -> Unit = {},
         crossinline onError: (Throwable) -> Unit = {},
     ): T? = coroutineScope {
-        post(url, params, onSuccess, onFail, onTimeout, onError)
+        request(url, params, REQUEST.POST, onSuccess, onFail, onTimeout, onError)
+    }
+
+
+    suspend inline fun <reified T> get(
+        url: String,
+        params: HashMap<String, Any>,
+        crossinline onSuccess: (T?) -> Unit = {},
+        crossinline onFail: (errorCode: Int?, errorMsg: String?) -> Unit,
+        crossinline onTimeout: (Throwable) -> Unit = {},
+        crossinline onError: (Throwable) -> Unit = {},
+    ): T? = coroutineScope {
+        request(url, params, REQUEST.GET, onSuccess, onFail, onTimeout, onError)
     }
 
     /**
      * 开启一个新的协程，不阻塞外部的协程块
      */
-    internal inline fun <reified T> requestAsync(
+    inline fun <reified T> postAsync(
         url: String,
         params: HashMap<String, Any>,
         crossinline onSuccess: (T?) -> Unit,
@@ -40,30 +52,48 @@ object HttpObservable {
     ) {
         val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
         coroutineScope.launch {
-            post(url, params, onSuccess, onFail, onTimeout, onError)
+            request(url, params, REQUEST.POST, onSuccess, onFail, onTimeout, onError)
             coroutineScope.cancel()
         }
     }
 
-    private suspend inline fun <reified T> post(
+
+    inline fun <reified T> getAsync(
         url: String,
         params: HashMap<String, Any>,
+        crossinline onSuccess: (T?) -> Unit,
+        crossinline onFail: (errorCode: Int?, errorMsg: String?) -> Unit,
+        crossinline onTimeout: (Throwable) -> Unit = {},
+        crossinline onError: (Throwable) -> Unit = {},
+    ) {
+        val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+        coroutineScope.launch {
+            request(url, params, REQUEST.GET, onSuccess, onFail, onTimeout, onError)
+            coroutineScope.cancel()
+        }
+    }
+
+    suspend inline fun <reified T> request(
+        url: String,
+        params: HashMap<String, Any>,
+        requestType: REQUEST,
         crossinline onSuccess: (T?) -> Unit,
         crossinline onFail: (errorCode: Int?, errorMsg: String?) -> Unit,
         crossinline onTimeout: (Throwable) -> Unit,
         crossinline onError: (Throwable) -> Unit,
     ): T? = coroutineScope {
         var responseData: T? = null;
-        val fetchDataFlow: Flow<Result<ResponseBean<T>>> = fetchData(url, params)
+        val fetchDataFlow: Flow<Result<ResponseBean<T>>> = fetchData(url, params, requestType)
         fetchDataFlow.collect { result ->
             if (result.isSuccess) {
                 val data: ResponseBean<T>? = result.getOrNull()
                 data?.let {
-                    if (it.code == 1) {
+
+                    if (it.succeed) {
                         responseData = it.data
                         onSuccess(it.data)
                     } else {
-                        onFail(it.code, it.message)
+                        onFail(it.errorCode, it.errorMsg)
                     }
                 }
             } else {
@@ -81,10 +111,10 @@ object HttpObservable {
     }
 
 
-    private inline fun <reified T> fetchData(
-        urlPath: String, params: HashMap<String, Any>
+    inline fun <reified T> fetchData(
+        urlPath: String, params: HashMap<String, Any>, requestType: REQUEST
     ): Flow<Result<ResponseBean<T>>> = flow {
-        val response: ResponseBean<T> = createPost(urlPath, params)
+        val response: ResponseBean<T> = createRequest(urlPath, params, requestType)
         if (response.data is List<*>) {
             val listType: Type = object : ParameterizedType {
                 override fun getActualTypeArguments(): Array<Type> {
@@ -120,31 +150,37 @@ object HttpObservable {
     }.flowOn(Dispatchers.IO)
 
 
-    private suspend fun <T> createPost(
-        urlPath: String, params: HashMap<String, Any>
+    suspend fun <T> createRequest(
+        urlPath: String, params: HashMap<String, Any>, requestType: REQUEST
     ): ResponseBean<T> {
-        val bodyParams: HashMap<String, Any> = getBaseBodyParam()
+        val bodyParams: HashMap<String, Any> = addBaseBodyParam(HashMap())
+        val headerParams: HashMap<String, Any> = addBaseHeaderParam(HashMap())
         bodyParams.putAll(params)
-        return RetrofitManager.getInstance().create(ApiService::class.java)
-            .post(urlPath, params, getBaseHeaderParam())
+        return if (requestType == REQUEST.POST) {
+            RetrofitManager.getInstance().create(ApiService::class.java).post(urlPath, params, headerParams)
+        } else (RetrofitManager.getInstance().create(ApiService::class.java).get(urlPath, params, headerParams))
     }
 
 
-    fun getBaseBodyParam(): HashMap<String, Any> {
-        val bodyParams = HashMap<String, Any>()
-        //配置body通用参数
-        // ...
-
-        return bodyParams
+    enum class REQUEST {
+        POST, GET
     }
 
 
-    fun getBaseHeaderParam(): HashMap<String, Any> {
-        val headerParams = HashMap<String, Any>()
-        //配置Header的通用参数
-        // ...
+    /**
+     * Body的通用参数
+     */
+    private fun addBaseBodyParam(params: HashMap<String, Any>): HashMap<String, Any> {
 
-        return headerParams
+        return params
+    }
+
+    /**
+     * Header的通用参数
+     */
+    private fun addBaseHeaderParam(params: HashMap<String, Any>): HashMap<String, Any> {
+
+        return params
     }
 
 }
