@@ -19,27 +19,26 @@ object LoginViewModel : ViewModel() {
             params["username"] = username
             params["password"] = password
 
-            val responseBean: LoginResponse = RetrofitManager.getInstance().create(ApiService::class.java).loginWanAndroid(
-                username,password
-            ).await()
+//            val responseBean: LoginResponse = RetrofitManager.getInstance().create(ApiService::class.java).loginWanAndroid(
+//                username,password
+//            ).await()
+//            Log.e("AAA", "onSuccess userInfo:" + GsonUtils.toJson(responseBean))
 
+            val userInfo: UserInfo? =
+                HttpObserver.post<UserInfo>("/user/login", params, onSuccess = {
+                    Log.e("AAA", "onSuccess userInfo:" + it?.toJson())
+                }, onFail = { errorCode, errorMsg ->
+                    Log.e("AAA", "onFail errorCode:$errorCode;errorMsg:$errorMsg")
+                }, onTimeout = {
+                    Log.e("AAA", "onTimeout :${it.message}")
 
-            Log.e("AAA", "onSuccess userInfo:" + GsonUtils.toJson(responseBean))
+                }, onError = {
+                    Log.e("AAA", "onError  :${it.message}")
+                })
 
-//            val userInfo: UserInfo? = HttpObserver.post<UserInfo>("/user/login", params, onSuccess = {
-//                Log.e("AAA", "onSuccess userInfo:" + it?.toJson())
-//            }, onFail = { errorCode, errorMsg ->
-//                Log.e("AAA", "onFail errorCode:$errorCode;errorMsg:$errorMsg")
-//            }, onTimeout = {
-//                Log.e("AAA", "onTimeout :${it.message}")
-//
-//            }, onError = {
-//                Log.e("AAA", "onError  :${it.message}")
-//            })
-//
-//            userInfo?.let {
-//
-//            }
+            userInfo?.let {
+
+            }
 
         }
     }

@@ -18,7 +18,7 @@ class WanAndroidApiActivity : BaseActivity() {
         setTitleText("API 测试")
 
         binding.tvLogin.setOnClickListener {
-            LoginViewModel.login("wuyq007", "wyq19930822.,")
+            LoginViewModel.login("wuyq007", "wyq19930822")
         }
 
     }
